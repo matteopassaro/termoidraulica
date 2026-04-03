@@ -1,0 +1,511 @@
+import { Layout } from "@/components/layout/Layout";
+import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
+import { motion } from "framer-motion";
+import { 
+  Wrench, 
+  Wind, 
+  Droplets, 
+  ThermometerSun, 
+  Star, 
+  ShieldCheck, 
+  Clock, 
+  Euro, 
+  MapPin,
+  ArrowRight,
+  PhoneCall
+} from "lucide-react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast";
+
+const formSchema = z.object({
+  tipoCaldaia: z.string().min(1, "Seleziona un tipo di caldaia"),
+  metratura: z.string().min(1, "Inserisci la metratura"),
+  consumi: z.string().min(1, "Inserisci i consumi attuali"),
+  email: z.string().email("Email non valida"),
+});
+
+export default function Home() {
+  const { toast } = useToast();
+  
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      tipoCaldaia: "",
+      metratura: "",
+      consumi: "",
+      email: "",
+    },
+  });
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    toast({
+      title: "Richiesta inviata!",
+      description: "Ti contatteremo a breve con la tua stima di risparmio.",
+    });
+    form.reset();
+  }
+
+  const fadeIn = {
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.6 }
+  };
+
+  return (
+    <Layout>
+      {/* 1. Hero Section */}
+      <section className="relative overflow-hidden bg-primary text-white pt-20 pb-32 md:pt-32 md:pb-48">
+        <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=2070')] bg-cover bg-center" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80" />
+        
+        <div className="container mx-auto px-4 md:px-6 relative z-10">
+          <div className="max-w-3xl">
+            <motion.div initial="initial" animate="whileInView" variants={fadeIn}>
+              <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full mb-6 border border-white/20 backdrop-blur-sm">
+                <span className="flex h-2 w-2 rounded-full bg-accent animate-pulse"></span>
+                <span className="text-sm font-medium">Interventi a Bari e Provincia</span>
+              </div>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 tracking-tight">
+                Il Comfort di Casa Tua,<br />
+                <span className="text-accent">Senza Pensieri.</span>
+              </h1>
+              <p className="text-xl md:text-2xl text-white/80 mb-10 leading-relaxed max-w-2xl font-light">
+                Esperti in idraulica, riscaldamento e condizionamento. 
+                Servizio rapido, pulito e garantito per la tua tranquillità.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a href="tel:+390801234567" className="w-full sm:w-auto">
+                  <Button size="lg" className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-white rounded-full text-lg h-14 px-8 shadow-lg shadow-accent/20">
+                    <PhoneCall className="w-5 h-5 mr-2" />
+                    Pronto Intervento
+                  </Button>
+                </a>
+                <Link href="/preventivo" className="w-full sm:w-auto">
+                  <Button size="lg" variant="outline" className="w-full sm:w-auto bg-white/10 border-white/30 text-white hover:bg-white hover:text-primary rounded-full text-lg h-14 px-8 backdrop-blur-sm transition-all">
+                    Richiedi Preventivo
+                  </Button>
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. Quick Services Bar */}
+      <section className="relative z-20 -mt-16 container mx-auto px-4 md:px-6">
+        <div className="bg-white rounded-2xl shadow-xl shadow-primary/5 p-6 md:p-10 border border-border">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+            {[
+              { icon: ThermometerSun, title: "Caldaie", desc: "Installazione e Manutenzione" },
+              { icon: Wind, title: "Climatizzatori", desc: "Sistemi a pompa di calore" },
+              { icon: Wrench, title: "Riparazioni", desc: "Interventi idraulici veloci" },
+              { icon: Droplets, title: "Ristrutturazione", desc: "Rifacimento bagno completo" }
+            ].map((service, i) => (
+              <motion.div 
+                key={i} 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 * i, duration: 0.5 }}
+                className="flex flex-col items-center text-center group cursor-pointer"
+              >
+                <div className="bg-secondary p-4 rounded-2xl mb-4 text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                  <service.icon className="w-8 h-8" />
+                </div>
+                <h3 className="font-bold text-foreground mb-1">{service.title}</h3>
+                <p className="text-sm text-muted-foreground hidden sm:block">{service.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Social Proof */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4 md:px-6">
+          <motion.div 
+            {...fadeIn}
+            className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 text-center md:text-left"
+          >
+            <div className="flex flex-col items-center md:items-start">
+              <div className="flex gap-1 text-accent mb-2">
+                {[...Array(5)].map((_, i) => <Star key={i} className="w-6 h-6 fill-current" />)}
+              </div>
+              <p className="text-lg font-bold text-foreground">Recensioni 5 Stelle su Google</p>
+              <p className="text-muted-foreground">Scelti da oltre 500 famiglie a Bari</p>
+            </div>
+            
+            <div className="hidden md:block w-px h-16 bg-border"></div>
+            
+            <div className="flex -space-x-4">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="w-12 h-12 rounded-full border-2 border-white bg-secondary flex items-center justify-center text-xs font-bold overflow-hidden">
+                  <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt="Cliente" />
+                </div>
+              ))}
+              <div className="w-12 h-12 rounded-full border-2 border-white bg-primary text-white flex items-center justify-center text-xs font-bold">
+                +500
+              </div>
+            </div>
+            
+            <div className="hidden md:block w-px h-16 bg-border"></div>
+
+            <div className="flex items-center gap-3">
+              <div className="bg-green-100 text-green-700 p-3 rounded-full">
+                <ShieldCheck className="w-6 h-6" />
+              </div>
+              <div>
+                <p className="font-bold text-foreground">Azienda Certificata</p>
+                <p className="text-sm text-muted-foreground">F-Gas e conformità impianti</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 4. Punti di Forza */}
+      <section className="py-24 bg-secondary">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Perché scegliere ThermoExpert?
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Non siamo il solito idraulico. Uniamo l'artigianalità barese alle tecnologie più moderne.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { icon: Euro, title: "Trasparenza Prezzi", desc: "Nessuna sorpresa. Preventivi chiari e dettagliati prima di iniziare i lavori." },
+              { icon: Clock, title: "Intervento in 2 ore", desc: "Per le emergenze, garantiamo l'arrivo di un tecnico entro 2 ore dalla chiamata." },
+              { icon: ShieldCheck, title: "Tecnici Certificati", desc: "Personale costantemente aggiornato e in possesso dei patentini F-Gas." },
+              { icon: Star, title: "Garanzia Lavori", desc: "Tutti i nostri interventi e i materiali installati sono coperti da garanzia." }
+            ].map((feature, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 * i, duration: 0.5 }}
+                className="bg-white p-8 rounded-2xl shadow-sm border border-border hover:shadow-md transition-shadow"
+              >
+                <div className="bg-primary/10 text-primary w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+                  <feature.icon className="w-7 h-7" />
+                </div>
+                <h3 className="text-xl font-bold text-foreground mb-3">{feature.title}</h3>
+                <p className="text-muted-foreground leading-relaxed">{feature.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Services Showcase */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div className="max-w-2xl">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                I nostri servizi principali
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                Copriamo ogni esigenza per la tua casa o azienda, con personale qualificato e attrezzature all'avanguardia.
+              </p>
+            </div>
+            <Link href="/servizi">
+              <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white rounded-full">
+                Vedi tutti i servizi <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                icon: ThermometerSun,
+                title: "Caldaie e Riscaldamento",
+                desc: "Installazione, manutenzione e bollino blu per caldaie multimarca.",
+                link: "/servizi"
+              },
+              {
+                icon: Wind,
+                title: "Climatizzazione",
+                desc: "Soluzioni per il raffrescamento residenziale e commerciale. Certificazione F-Gas.",
+                link: "/servizi"
+              },
+              {
+                icon: Wrench,
+                title: "Pronto Intervento Idraulico",
+                desc: "Riparazione perdite, disostruzioni e interventi urgenti h24.",
+                link: "/servizi"
+              }
+            ].map((service, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 * i, duration: 0.5 }}
+                className="group relative bg-secondary rounded-3xl overflow-hidden p-8 border border-border hover:shadow-lg transition-all"
+              >
+                <div className="bg-white text-primary w-16 h-16 rounded-2xl flex items-center justify-center mb-8 shadow-sm group-hover:bg-primary group-hover:text-white transition-colors">
+                  <service.icon className="w-8 h-8" />
+                </div>
+                <h3 className="text-2xl font-bold text-foreground mb-4">{service.title}</h3>
+                <p className="text-muted-foreground mb-8 leading-relaxed">{service.desc}</p>
+                <Link href={service.link} className="inline-flex items-center text-primary font-bold hover:text-accent transition-colors">
+                  Scopri di più <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Lead Magnet Form (Calcola Risparmio) */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="bg-primary rounded-3xl overflow-hidden shadow-2xl flex flex-col lg:flex-row">
+            <div className="lg:w-1/2 p-10 md:p-16 flex flex-col justify-center text-white relative">
+              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=2069')] bg-cover opacity-10 mix-blend-overlay"></div>
+              <div className="relative z-10">
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 leading-tight">
+                  Calcola il risparmio con la tua nuova caldaia
+                </h2>
+                <p className="text-white/80 text-lg mb-8">
+                  Sapevi che una caldaia a condensazione moderna può farti risparmiare fino al 30% sulla bolletta del gas? Scopri quanto potresti risparmiare in base alla tua casa.
+                </p>
+                <ul className="space-y-4 mb-8">
+                  {['Sopralluogo gratuito a Bari', 'Pratiche Ecobonus incluse', 'Installazione in giornata'].map((item, i) => (
+                    <li key={i} className="flex items-center gap-3">
+                      <div className="bg-accent/20 p-1 rounded-full text-accent">
+                        <Star className="w-4 h-4 fill-current" />
+                      </div>
+                      <span className="font-medium">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            
+            <div className="lg:w-1/2 bg-white p-10 md:p-16">
+              <h3 className="text-2xl font-bold text-foreground mb-6">Ricevi la tua stima gratuita</h3>
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <FormField
+                    control={form.control}
+                    name="tipoCaldaia"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Tipo di caldaia attuale</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger className="h-12 border-border focus:ring-primary">
+                              <SelectValue placeholder="Seleziona tipo..." />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="tradizionale">Tradizionale (Oltre 10 anni)</SelectItem>
+                            <SelectItem value="condensazione_vecchia">A condensazione (Oltre 5 anni)</SelectItem>
+                            <SelectItem value="non_so">Non lo so</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <FormField
+                      control={form.control}
+                      name="metratura"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Metratura Casa (mq)</FormLabel>
+                          <FormControl>
+                            <Input placeholder="es. 100" className="h-12 border-border focus:ring-primary" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="consumi"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Consumi Attuali (Gas)</FormLabel>
+                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <FormControl>
+                              <SelectTrigger className="h-12 border-border focus:ring-primary">
+                                <SelectValue placeholder="Seleziona..." />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="bassi">Meno di 500€/anno</SelectItem>
+                              <SelectItem value="medi">Tra 500€ e 1000€/anno</SelectItem>
+                              <SelectItem value="alti">Più di 1000€/anno</SelectItem>
+                              <SelectItem value="non_so">Non lo so</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input type="email" placeholder="tua@email.it" className="h-12 border-border focus:ring-primary" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <Button type="submit" className="w-full bg-accent hover:bg-accent/90 h-14 text-lg font-bold shadow-lg shadow-accent/20 rounded-xl" data-testid="btn-calcola-risparmio">
+                    Calcola il mio risparmio
+                  </Button>
+                  <p className="text-xs text-center text-muted-foreground mt-4">
+                    Nessun impegno. Riceverai solo la stima via email.
+                  </p>
+                </form>
+              </Form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Testimonials */}
+      <section className="py-24 bg-secondary/50">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Cosa dicono i Baresi di noi
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              La soddisfazione dei nostri clienti è la nostra migliore garanzia.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                name: "Nicola L.",
+                area: "Poggiofranco",
+                text: "Tubo rotto a mezzanotte del sabato. In un'ora erano a casa mia e hanno risolto il problema senza distruggere mezzo bagno. Professionalità assoluta che a Bari è rara da trovare.",
+              },
+              {
+                name: "Maria C.",
+                area: "Japigia",
+                text: "Ho sostituito la vecchia caldaia con loro. Preventivo rispettato al centesimo, lavoro pulitissimo e mi hanno anche seguito per le pratiche della detrazione. Consigliatissimi!",
+              },
+              {
+                name: "Francesco D.",
+                area: "Torre a Mare",
+                text: "Installazione di tre climatizzatori in pieno luglio. I ragazzi sono stati educati, veloci e hanno lasciato le stanze più pulite di come le hanno trovate. Prezzo onesto per la qualità offerta."
+              }
+            ].map((review, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 * i, duration: 0.5 }}
+                className="bg-white p-8 rounded-2xl shadow-sm border border-border"
+              >
+                <div className="flex text-accent mb-6">
+                  {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-current" />)}
+                </div>
+                <p className="text-foreground/80 mb-8 italic">"{review.text}"</p>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary font-bold text-xl">
+                    {review.name.charAt(0)}
+                  </div>
+                  <div>
+                    <p className="font-bold text-foreground">{review.name}</p>
+                    <p className="text-sm text-muted-foreground">{review.area}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 8. Coverage Area */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="flex flex-col lg:flex-row items-center gap-16">
+            <div className="lg:w-1/2">
+              <motion.div {...fadeIn}>
+                <div className="inline-flex items-center gap-2 text-primary font-bold mb-4">
+                  <MapPin className="w-5 h-5" />
+                  <span>Sempre vicini a te</span>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+                  Serviamo tutto il Barese, <br/>da nord a sud.
+                </h2>
+                <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                  La nostra sede in pieno centro ci permette di raggiungere rapidamente ogni quartiere di Bari e i comuni limitrofi. I nostri furgoni officina sono sempre pronti a partire.
+                </p>
+                
+                <div className="grid grid-cols-2 gap-4 mb-8">
+                  <ul className="space-y-3 font-medium text-foreground/80">
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-accent"></div> Poggiofranco e Carrassi</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-accent"></div> Japigia e Torre a Mare</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-accent"></div> San Pasquale</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-accent"></div> Centro Murat e Madonnella</li>
+                  </ul>
+                  <ul className="space-y-3 font-medium text-foreground/80">
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-accent"></div> Carbonara e Ceglie</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-accent"></div> Palese e Santo Spirito</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-accent"></div> San Paolo</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-accent"></div> Provincia (Triggiano, Valenzano...)</li>
+                  </ul>
+                </div>
+                
+                <Link href="/contatti">
+                  <Button variant="outline" className="h-12 px-6 rounded-full border-primary text-primary hover:bg-primary hover:text-white transition-colors">
+                    Verifica copertura nella tua zona <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </Link>
+              </motion.div>
+            </div>
+            
+            <div className="lg:w-1/2 w-full">
+              <div className="bg-secondary rounded-3xl overflow-hidden aspect-square md:aspect-video relative flex items-center justify-center border border-border shadow-inner">
+                {/* Map Placeholder */}
+                <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=2074')] bg-cover bg-center mix-blend-luminosity"></div>
+                <div className="relative z-10 text-center p-8 bg-white/90 backdrop-blur-md rounded-2xl shadow-xl max-w-sm">
+                  <MapPin className="w-12 h-12 text-accent mx-auto mb-4" />
+                  <h3 className="text-xl font-bold text-primary mb-2">Bari e Provincia</h3>
+                  <p className="text-muted-foreground">Intervento rapido garantito in 2h per tutto il comune di Bari.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </Layout>
+  );
+}
