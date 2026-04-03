@@ -2,15 +2,15 @@ import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { 
-  Wrench, 
-  Wind, 
-  Droplets, 
-  ThermometerSun, 
-  Star, 
-  ShieldCheck, 
-  Clock, 
-  Euro, 
+import {
+  Wrench,
+  Wind,
+  Droplets,
+  ThermometerSun,
+  Star,
+  ShieldCheck,
+  Clock,
+  Euro,
   MapPin,
   ArrowRight,
   PhoneCall
@@ -39,7 +39,7 @@ const formSchema = z.object({
 
 export default function Home() {
   const { toast } = useToast();
-  
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -74,7 +74,7 @@ export default function Home() {
           <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-accent/20 rounded-full blur-[120px] mix-blend-screen opacity-50 transform translate-x-1/3 -translate-y-1/4 animate-pulse duration-[10000ms]" />
           <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-500/20 rounded-full blur-[100px] mix-blend-screen opacity-50 transform -translate-x-1/4 translate-y-1/4" />
         </div>
-        
+
         {/* Subtle grid pattern */}
         <div className="absolute inset-0 z-0 opacity-10" style={{ backgroundImage: "linear-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.2) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
 
@@ -139,7 +139,7 @@ export default function Home() {
               <div className="relative w-full max-w-[500px]">
                 {/* Floating glass panel behind */}
                 <div className="absolute -inset-4 bg-white/5 backdrop-blur-3xl rounded-[3rem] border border-white/10 shadow-2xl transform rotate-3" />
-                
+
                 <img
                   src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=800&auto=format&fit=crop"
                   alt="Tecnico termoidraulico certificato al lavoro"
@@ -148,7 +148,7 @@ export default function Home() {
                   fetchPriority="high"
                   className="relative z-10 w-full h-[520px] object-cover rounded-[2.5rem] shadow-2xl border border-white/20 bg-black/5"
                 />
-                
+
                 {/* Floating specs */}
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
@@ -164,7 +164,7 @@ export default function Home() {
                     <p className="text-lg font-bold text-foreground leading-none mt-1">F-Gas Autorizzata</p>
                   </div>
                 </motion.div>
-                
+
                 <motion.div
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -195,8 +195,8 @@ export default function Home() {
               { icon: Wrench, title: "Idraulica", desc: "Pronto Intervento", color: "text-gray-700" },
               { icon: Droplets, title: "Ristrutturazione", desc: "Bagni Premium", color: "text-cyan-500" }
             ].map((service, i) => (
-              <motion.div 
-                key={i} 
+              <motion.div
+                key={i}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 + (0.1 * i), duration: 0.5 }}
@@ -216,11 +216,11 @@ export default function Home() {
       {/* Premium Services Showcase */}
       <section className="py-24 md:py-32 bg-white">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="flex flex-col lg:flex-row justify-between items-end mb-16 md:mb-24 gap-6">
+          <div className="flex flex-col lg:flex-row justify-between items-center lg:items-end mb-16 md:mb-24 gap-8 text-center lg:text-left">
             <div className="max-w-3xl">
               <span className="inline-block text-sm font-extrabold text-accent uppercase tracking-widest mb-3 md:mb-4">Competenza Totale</span>
               <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-foreground leading-[1.1] tracking-tight">
-                Diamo valore ai<br />spazi che vivi.
+                Diamo valore agli<br />spazi che vivi.
               </h2>
             </div>
             <Link href="/servizi" className="w-full md:w-auto">
@@ -372,7 +372,7 @@ export default function Home() {
                 ))}
               </div>
             </div>
-            
+
             <div className="lg:w-7/12 bg-white p-10 md:p-16">
               <h3 className="text-2xl font-extrabold text-foreground mb-8">Ottieni una stima gratuita</h3>
               <Form {...form}>
@@ -399,7 +399,7 @@ export default function Home() {
                       </FormItem>
                     )}
                   />
-                  
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <FormField
                       control={form.control}
@@ -438,7 +438,7 @@ export default function Home() {
                       )}
                     />
                   </div>
-                  
+
                   <FormField
                     control={form.control}
                     name="email"
@@ -452,7 +452,7 @@ export default function Home() {
                       </FormItem>
                     )}
                   />
-                  
+
                   <Button type="submit" className="btn-shimmer mt-4 w-full bg-accent hover:bg-accent/90 h-16 text-xl font-extrabold shadow-xl shadow-accent/20 rounded-2xl transition-all duration-300 hover:scale-[1.02]">
                     Richiedi Stima Gratuita
                   </Button>
