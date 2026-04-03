@@ -290,61 +290,103 @@ export default function Home() {
       </section>
 
       {/* 5. Services Showcase */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-[hsl(214,20%,97%)]">
         <div className="container mx-auto px-4 md:px-6">
+          {/* Header */}
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
             <div className="max-w-2xl">
+              <span className="inline-block text-sm font-bold text-accent uppercase tracking-widest mb-3">I nostri servizi</span>
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                I nostri servizi principali
+                Tutto ciò di cui hai bisogno,<br className="hidden md:block" /> in un'unica azienda
               </h2>
               <p className="text-lg text-muted-foreground">
-                Copriamo ogni esigenza per la tua casa o azienda, con personale qualificato e attrezzature all'avanguardia.
+                Copriamo ogni esigenza per la tua casa o azienda a Bari e provincia, con personale qualificato e attrezzature all'avanguardia.
               </p>
             </div>
             <Link href="/servizi">
-              <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white rounded-full transition-all duration-200 hover:scale-105">
+              <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white rounded-full transition-all duration-200 hover:scale-105 shrink-0">
                 Vedi tutti i servizi <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Service Cards — 2×2 on md, 4-col on xl */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
             {[
               {
                 icon: ThermometerSun,
+                color: "bg-blue-50 text-blue-600",
+                iconBg: "bg-blue-100",
+                accentLine: "bg-blue-500",
                 title: "Caldaie e Riscaldamento",
-                desc: "Installazione, manutenzione e bollino blu per caldaie multimarca.",
+                desc: "Installazione, manutenzione e bollino blu per caldaie multimarca a condensazione. Sostituiamo la tua vecchia caldaia in giornata.",
+                tag: "Risparmio energetico",
                 link: "/servizi"
               },
               {
                 icon: Wind,
+                color: "bg-cyan-50 text-cyan-600",
+                iconBg: "bg-cyan-100",
+                accentLine: "bg-cyan-500",
                 title: "Climatizzazione",
-                desc: "Soluzioni per il raffrescamento residenziale e commerciale. Certificazione F-Gas.",
+                desc: "Installiamo climatizzatori per ogni ambiente. Certificati F-Gas per ricarica gas refrigerante e pompe di calore ad alta efficienza.",
+                tag: "F-Gas Certificati",
                 link: "/servizi"
               },
               {
                 icon: Wrench,
-                title: "Pronto Intervento Idraulico",
-                desc: "Riparazione perdite, disostruzioni e interventi urgenti h24.",
+                color: "bg-blue-50 text-blue-700",
+                iconBg: "bg-blue-100",
+                accentLine: "bg-blue-700",
+                title: "Pronto Intervento",
+                desc: "Perdite, disostruzioni, allagamenti — interveniamo entro 2 ore su tutto il territorio barese, da Carbonara a Poggiofranco.",
+                tag: "H24 Emergenze",
+                link: "/servizi"
+              },
+              {
+                icon: Droplets,
+                color: "bg-sky-50 text-sky-600",
+                iconBg: "bg-sky-100",
+                accentLine: "bg-sky-500",
+                title: "Ristrutturazione Bagno",
+                desc: "Rifacimento completo chiavi in mano. Dalla demolizione alle finiture, gestiamo ogni fase del tuo nuovo bagno a Bari.",
+                tag: "Chiavi in mano",
                 link: "/servizi"
               }
             ].map((service, i) => (
-              <motion.div 
+              <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.1 * i, duration: 0.5 }}
-                className="group relative bg-secondary rounded-3xl overflow-hidden p-8 border border-border hover:shadow-lg transition-all"
+                transition={{ delay: 0.08 * i, duration: 0.5, ease: "easeOut" }}
+                className="group bg-white border border-gray-200 rounded-3xl p-7 shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 flex flex-col"
               >
-                <div className="bg-white text-primary w-16 h-16 rounded-2xl flex items-center justify-center mb-8 shadow-sm group-hover:bg-primary group-hover:text-white transition-colors">
-                  <service.icon className="w-8 h-8" />
+                {/* Accent top line */}
+                <div className={`w-10 h-1 rounded-full mb-6 ${service.accentLine}`} />
+
+                {/* Icon */}
+                <div className={`${service.iconBg} w-20 h-20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                  <service.icon className={`w-10 h-10 ${service.color.split(' ')[1]}`} />
                 </div>
-                <h3 className="text-2xl font-bold text-foreground mb-4">{service.title}</h3>
-                <p className="text-muted-foreground mb-8 leading-relaxed">{service.desc}</p>
-                <Link href={service.link} className="inline-flex items-center text-primary font-bold hover:text-accent transition-colors">
-                  Scopri di più <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                </Link>
+
+                {/* Content */}
+                <h3 className="text-xl font-bold text-foreground mb-3 leading-snug">{service.title}</h3>
+                <p className="text-muted-foreground leading-relaxed text-sm flex-1 mb-6">{service.desc}</p>
+
+                {/* Footer row */}
+                <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
+                  <span className="text-xs font-semibold text-muted-foreground bg-gray-100 px-3 py-1 rounded-full">
+                    {service.tag}
+                  </span>
+                  <Link
+                    href={service.link}
+                    className="inline-flex items-center gap-1 text-primary font-bold text-sm hover:text-accent transition-colors group-hover:gap-2"
+                    data-testid={`link-service-${i}`}
+                  >
+                    Scopri <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                  </Link>
+                </div>
               </motion.div>
             ))}
           </div>
