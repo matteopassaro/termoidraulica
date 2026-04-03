@@ -393,6 +393,153 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 5b. Perché Sceglierci — Bento Grid */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-4 md:px-6">
+          {/* Section header */}
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <span className="inline-block text-sm font-bold text-accent uppercase tracking-widest mb-3">I numeri parlano</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Perché sceglierci</h2>
+            <p className="text-lg text-muted-foreground">
+              Oltre 15 anni a servizio delle famiglie e delle imprese di Bari. La fiducia si costruisce un intervento alla volta.
+            </p>
+          </div>
+
+          {/* Bento Grid — 3 cols desktop, stacked mobile */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 auto-rows-auto">
+
+            {/* TILE 1 — Google Reviews (col-span-2, tall) */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, ease: "easeOut" }}
+              className="md:col-span-2 relative bg-[hsl(214,89%,22%)] rounded-3xl p-8 md:p-10 overflow-hidden flex flex-col justify-between min-h-[280px]"
+            >
+              {/* Background decoration */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/4" />
+              <div className="absolute bottom-0 left-0 w-40 h-40 bg-cyan-400/10 rounded-full translate-y-1/3 -translate-x-1/4" />
+
+              <div className="relative z-10">
+                {/* Stars */}
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-6 h-6 text-yellow-400 fill-yellow-400" />
+                  ))}
+                  <span className="ml-2 text-white/80 font-semibold text-sm self-center">5.0 su Google</span>
+                </div>
+
+                <blockquote className="text-white text-xl md:text-2xl font-medium leading-relaxed mb-6 max-w-lg">
+                  "Tecnici puntuali, professionali e prezzi onesti. In meno di 2 ore hanno risolto un problema che avevo da settimane."
+                </blockquote>
+
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white font-bold text-sm">MR</div>
+                  <div>
+                    <p className="text-white font-semibold text-sm">Marco Russo</p>
+                    <p className="text-white/60 text-xs">Poggiofranco, Bari · Google Review</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Big stat */}
+              <div className="relative z-10 mt-8 pt-6 border-t border-white/15 flex items-end justify-between">
+                <div>
+                  <p className="text-5xl md:text-6xl font-extrabold text-white leading-none">500+</p>
+                  <p className="text-white/70 font-medium mt-1">Recensioni verificate</p>
+                </div>
+                <div className="bg-white/10 rounded-2xl px-4 py-2 border border-white/20">
+                  <p className="text-white/60 text-xs mb-0.5">Media voti</p>
+                  <p className="text-white font-bold text-xl">4.9 / 5</p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* TILE 2 — Anni di esperienza (col-span-1, tall) */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, ease: "easeOut", delay: 0.1 }}
+              className="bg-white border border-gray-200 rounded-3xl p-8 flex flex-col justify-between shadow-sm hover:shadow-xl transition-all duration-300 min-h-[280px]"
+            >
+              <div>
+                <div className="bg-blue-100 w-14 h-14 rounded-2xl flex items-center justify-center mb-6">
+                  <ShieldCheck className="w-7 h-7 text-blue-600" />
+                </div>
+                <p className="text-sm font-bold text-muted-foreground uppercase tracking-widest mb-2">Fondata nel 2009</p>
+                <p className="text-foreground text-lg font-medium leading-snug">Esperienza maturata su migliaia di abitazioni e uffici a Bari e provincia.</p>
+              </div>
+              <div className="mt-6 pt-6 border-t border-gray-100">
+                <p className="text-7xl font-extrabold text-primary leading-none">15+</p>
+                <p className="text-muted-foreground font-semibold mt-1">Anni di esperienza</p>
+              </div>
+            </motion.div>
+
+            {/* TILE 3 — Velocità di intervento (col-span-1) */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, ease: "easeOut", delay: 0.15 }}
+              className="bg-accent rounded-3xl p-8 flex flex-col justify-between shadow-sm hover:shadow-xl transition-all duration-300 min-h-[220px] overflow-hidden relative"
+            >
+              <div className="absolute bottom-0 right-0 w-36 h-36 bg-white/10 rounded-full translate-x-1/3 translate-y-1/3" />
+              <div className="relative z-10">
+                <div className="bg-white/20 w-14 h-14 rounded-2xl flex items-center justify-center mb-6">
+                  <Clock className="w-7 h-7 text-white" />
+                </div>
+                <p className="text-white/80 font-semibold text-sm uppercase tracking-widest mb-2">Tempo di risposta</p>
+                <p className="text-6xl font-extrabold text-white leading-none">2h</p>
+                <p className="text-white/80 font-medium mt-2">Intervento garantito entro 2 ore dall'emergenza, 7 giorni su 7.</p>
+              </div>
+            </motion.div>
+
+            {/* TILE 4 — Tecnici Certificati (col-span-1) */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, ease: "easeOut", delay: 0.2 }}
+              className="bg-white border border-gray-200 rounded-3xl p-8 flex flex-col justify-between shadow-sm hover:shadow-xl transition-all duration-300 min-h-[220px]"
+            >
+              <div className="bg-green-100 w-14 h-14 rounded-2xl flex items-center justify-center mb-5">
+                <Euro className="w-7 h-7 text-green-600" />
+              </div>
+              <div>
+                <p className="text-foreground font-bold text-xl mb-2">Prezzi trasparenti</p>
+                <p className="text-muted-foreground text-sm leading-relaxed">Nessuna sorpresa in bolletta. Preventivo dettagliato prima di iniziare qualsiasi lavoro.</p>
+              </div>
+              <div className="mt-5 flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse" />
+                <span className="text-sm font-semibold text-green-600">Preventivo gratuito</span>
+              </div>
+            </motion.div>
+
+            {/* TILE 5 — CTA tile (col-span-1) */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, ease: "easeOut", delay: 0.25 }}
+              className="bg-[hsl(214,89%,18%)] rounded-3xl p-8 flex flex-col justify-between shadow-sm hover:shadow-xl transition-all duration-300 min-h-[220px] relative overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-600/30 to-transparent" />
+              <div className="relative z-10">
+                <p className="text-white/70 text-sm font-semibold uppercase tracking-widest mb-3">Pronto a iniziare?</p>
+                <p className="text-white text-2xl font-bold leading-snug mb-6">Chiama adesso o richiedi un preventivo gratuito.</p>
+                <a href="tel:+390801234567">
+                  <Button className="btn-shimmer w-full bg-accent hover:bg-accent/90 text-white font-bold rounded-2xl h-12 transition-all duration-200 hover:scale-105">
+                    <PhoneCall className="w-4 h-4 mr-2" /> 080 123 4567
+                  </Button>
+                </a>
+              </div>
+            </motion.div>
+
+          </div>
+        </div>
+      </section>
+
       {/* 6. Lead Magnet Form (Calcola Risparmio) */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4 md:px-6">
