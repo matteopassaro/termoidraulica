@@ -67,40 +67,115 @@ export default function Home() {
 
   return (
     <Layout>
-      {/* 1. Hero Section */}
-      <section className="relative overflow-hidden bg-primary text-white pt-20 pb-32 md:pt-32 md:pb-48">
-        <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=2070')] bg-cover bg-center" />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80" />
-        
-        <div className="container mx-auto px-4 md:px-6 relative z-10">
-          <div className="max-w-3xl">
-            <motion.div initial="initial" animate="whileInView" variants={fadeIn}>
-              <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full mb-6 border border-white/20 backdrop-blur-sm">
-                <span className="flex h-2 w-2 rounded-full bg-accent animate-pulse"></span>
-                <span className="text-sm font-medium">Interventi a Bari e Provincia</span>
+      {/* 1. Hero Section — Two-column layout */}
+      <section className="relative overflow-hidden bg-[hsl(214,89%,20%)] text-white pt-20 pb-32 md:pt-28 md:pb-40">
+        {/* Subtle background texture */}
+        <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "radial-gradient(circle at 20% 50%, white 1px, transparent 1px), radial-gradient(circle at 80% 20%, white 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
+        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(214,89%,20%)] via-[hsl(214,89%,25%)] to-[hsl(200,89%,18%)]" />
+
+        <div className="container mx-auto px-4 md:px-8 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+
+            {/* LEFT column — headline & CTAs */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+            >
+              {/* Badge with pulsing green dot */}
+              <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full mb-7 border border-white/20 backdrop-blur-sm">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-400"></span>
+                </span>
+                <span className="text-sm font-semibold tracking-wide">Disponibile ora a Bari</span>
               </div>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 tracking-tight">
-                Il Comfort di Casa Tua,<br />
-                <span className="text-accent">Senza Pensieri.</span>
+
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] mb-6 tracking-tight">
+                <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-cyan-400 bg-clip-text text-transparent">
+                  Il Comfort<br />di Casa Tua,
+                </span>
+                <br />
+                <span className="text-white">Senza Pensieri.</span>
               </h1>
-              <p className="text-xl md:text-2xl text-white/80 mb-10 leading-relaxed max-w-2xl font-light">
-                Esperti in idraulica, riscaldamento e condizionamento. 
-                Servizio rapido, pulito e garantito per la tua tranquillità.
+
+              <p className="text-lg md:text-xl text-white/75 mb-10 leading-relaxed max-w-lg font-light">
+                Esperti in idraulica, riscaldamento e condizionamento a Bari e provincia.
+                Servizio rapido, pulito e garantito — dalla periferia al centro.
               </p>
+
               <div className="flex flex-col sm:flex-row gap-4">
                 <a href="tel:+390801234567" className="w-full sm:w-auto">
-                  <Button size="lg" className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-white rounded-full text-lg h-14 px-8 shadow-lg shadow-accent/20">
+                  <Button
+                    size="lg"
+                    data-testid="button-pronto-intervento"
+                    className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-white rounded-full text-lg h-14 px-8 shadow-xl shadow-accent/30 transition-all hover:scale-105"
+                  >
                     <PhoneCall className="w-5 h-5 mr-2" />
                     Pronto Intervento
                   </Button>
                 </a>
                 <Link href="/preventivo" className="w-full sm:w-auto">
-                  <Button size="lg" variant="outline" className="w-full sm:w-auto bg-white/10 border-white/30 text-white hover:bg-white hover:text-primary rounded-full text-lg h-14 px-8 backdrop-blur-sm transition-all">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    data-testid="button-richiedi-preventivo-hero"
+                    className="w-full sm:w-auto bg-white/10 border-white/30 text-white hover:bg-white hover:text-primary rounded-full text-lg h-14 px-8 backdrop-blur-sm transition-all hover:scale-105"
+                  >
                     Richiedi Preventivo
                   </Button>
                 </Link>
               </div>
             </motion.div>
+
+            {/* RIGHT column — image */}
+            <motion.div
+              initial={{ opacity: 0, x: 30, scale: 0.95 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
+              className="hidden md:flex justify-center items-center"
+            >
+              <div className="relative w-full max-w-md">
+                {/* Decorative glow behind image */}
+                <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-cyan-400/30 to-blue-500/20 blur-3xl scale-110" />
+                <img
+                  src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=900&auto=format&fit=crop"
+                  alt="Tecnico termoidraulico certificato al lavoro"
+                  data-testid="img-hero-technician"
+                  className="relative z-10 w-full h-[480px] object-cover rounded-[2.5rem] shadow-2xl shadow-black/40 border border-white/10"
+                />
+                {/* Floating stats pill */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6, duration: 0.5 }}
+                  className="absolute -bottom-5 -left-5 z-20 bg-white rounded-2xl shadow-xl px-5 py-3.5 flex items-center gap-3"
+                >
+                  <div className="bg-accent/10 rounded-xl p-2">
+                    <ShieldCheck className="w-6 h-6 text-accent" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500 font-medium">Clienti soddisfatti</p>
+                    <p className="text-lg font-extrabold text-primary leading-none">500+ interventi</p>
+                  </div>
+                </motion.div>
+                {/* Floating badge top right */}
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.75, duration: 0.5 }}
+                  className="absolute -top-4 -right-4 z-20 bg-white rounded-2xl shadow-xl px-4 py-3 flex items-center gap-2.5"
+                >
+                  <div className="flex">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                    ))}
+                  </div>
+                  <span className="text-sm font-bold text-gray-800">5.0 Google</span>
+                </motion.div>
+              </div>
+            </motion.div>
+
           </div>
         </div>
       </section>
