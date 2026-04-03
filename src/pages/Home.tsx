@@ -141,9 +141,12 @@ export default function Home() {
                 <div className="absolute -inset-4 bg-white/5 backdrop-blur-3xl rounded-[3rem] border border-white/10 shadow-2xl transform rotate-3" />
                 
                 <img
-                  src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=900&auto=format&fit=crop"
+                  src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=800&auto=format&fit=crop"
                   alt="Tecnico termoidraulico certificato al lavoro"
-                  className="relative z-10 w-full h-[520px] object-cover rounded-[2.5rem] shadow-2xl border border-white/20"
+                  width="500"
+                  height="520"
+                  fetchPriority="high"
+                  className="relative z-10 w-full h-[520px] object-cover rounded-[2.5rem] shadow-2xl border border-white/20 bg-black/5"
                 />
                 
                 {/* Floating specs */}
@@ -323,7 +326,7 @@ export default function Home() {
               <p className="text-muted-foreground font-medium leading-relaxed">Solo ricambi originali e materiali top di gamma, con garanzia estesa su tutte le nostre installazioni.</p>
             </motion.div>
 
-            <motion.div {...fadeIn} transition={{ delay: 0.3 }} className="md:col-span-2 bg-[url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center rounded-[2.5rem] p-10 relative overflow-hidden group">
+            <motion.div {...fadeIn} transition={{ delay: 0.3 }} className="md:col-span-2 bg-[url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1200&auto=format&fit=crop')] bg-cover bg-center rounded-[2.5rem] p-10 relative overflow-hidden group">
               <div className="absolute inset-0 bg-foreground/80 group-hover:bg-foreground/70 transition-colors duration-500" />
               <div className="relative z-10 flex flex-col h-full justify-center lg:pl-8">
                 <div className="flex gap-1 mb-4">
@@ -462,7 +465,7 @@ export default function Home() {
 
       {/* Coverage Area */}
       <section className="py-24 bg-foreground relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=2074')] bg-cover bg-center opacity-10 mix-blend-luminosity" />
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1200&auto=format')] bg-cover bg-center opacity-10 mix-blend-luminosity" />
         <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
           <MapPin className="w-16 h-16 text-accent mx-auto mb-6" />
           <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">Operiamo a Bari e Provincia</h2>
