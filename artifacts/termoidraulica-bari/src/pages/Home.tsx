@@ -109,7 +109,7 @@ export default function Home() {
                   <Button
                     size="lg"
                     data-testid="button-pronto-intervento"
-                    className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-white rounded-full text-lg h-14 px-8 shadow-xl shadow-accent/30 transition-all hover:scale-105"
+                    className="btn-shimmer w-full sm:w-auto bg-accent hover:bg-accent/90 text-white rounded-full text-lg h-14 px-8 shadow-xl shadow-accent/30 transition-all duration-200 hover:scale-105 hover:shadow-2xl"
                   >
                     <PhoneCall className="w-5 h-5 mr-2" />
                     Pronto Intervento
@@ -120,7 +120,7 @@ export default function Home() {
                     size="lg"
                     variant="outline"
                     data-testid="button-richiedi-preventivo-hero"
-                    className="w-full sm:w-auto bg-white/10 border-white/30 text-white hover:bg-white hover:text-primary rounded-full text-lg h-14 px-8 backdrop-blur-sm transition-all hover:scale-105"
+                    className="w-full sm:w-auto bg-white/10 border-white/30 text-white hover:bg-white hover:text-primary rounded-full text-lg h-14 px-8 backdrop-blur-sm transition-all duration-200 hover:scale-105"
                   >
                     Richiedi Preventivo
                   </Button>
@@ -302,7 +302,7 @@ export default function Home() {
               </p>
             </div>
             <Link href="/servizi">
-              <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white rounded-full">
+              <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white rounded-full transition-all duration-200 hover:scale-105">
                 Vedi tutti i servizi <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
@@ -457,7 +457,7 @@ export default function Home() {
                     )}
                   />
                   
-                  <Button type="submit" className="w-full bg-accent hover:bg-accent/90 h-14 text-lg font-bold shadow-lg shadow-accent/20 rounded-xl" data-testid="btn-calcola-risparmio">
+                  <Button type="submit" className="btn-shimmer w-full bg-accent hover:bg-accent/90 h-14 text-lg font-bold shadow-lg shadow-accent/20 rounded-xl transition-all duration-200 hover:scale-[1.02] hover:shadow-xl" data-testid="btn-calcola-risparmio">
                     Calcola il mio risparmio
                   </Button>
                   <p className="text-xs text-center text-muted-foreground mt-4">

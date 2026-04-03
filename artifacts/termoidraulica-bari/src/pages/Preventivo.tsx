@@ -224,7 +224,7 @@ export default function Preventivo() {
                     )}
                   />
 
-                  <Button type="submit" className="w-full bg-accent hover:bg-accent/90 h-14 text-lg font-bold shadow-lg shadow-accent/20 rounded-xl" data-testid="btn-submit-preventivo">
+                  <Button type="submit" className="btn-shimmer w-full bg-accent hover:bg-accent/90 h-14 text-lg font-bold shadow-lg shadow-accent/20 rounded-xl transition-all duration-200 hover:scale-[1.02] hover:shadow-xl hover:shadow-accent/30" data-testid="btn-submit-preventivo">
                     Invia Richiesta di Preventivo
                   </Button>
                 </form>

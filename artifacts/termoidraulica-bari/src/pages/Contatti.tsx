@@ -106,7 +106,7 @@ export default function Contatti() {
                   Per fornirti una stima accurata, abbiamo bisogno di alcune informazioni. Compila il nostro modulo dettagliato e ti risponderemo in meno di 24 ore.
                 </p>
                 <Link href="/preventivo">
-                  <Button className="w-full bg-accent hover:bg-accent/90 text-white font-bold h-14 text-lg rounded-xl shadow-lg shadow-accent/20">
+                  <Button className="btn-shimmer w-full bg-accent hover:bg-accent/90 text-white font-bold h-14 text-lg rounded-xl shadow-lg shadow-accent/20 transition-all duration-200 hover:scale-[1.02] hover:shadow-xl hover:shadow-accent/30">
                     Vai al modulo preventivo <ArrowRight className="w-5 h-5 ml-2" />
                   </Button>
                 </Link>

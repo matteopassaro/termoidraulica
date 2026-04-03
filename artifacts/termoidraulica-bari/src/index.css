@@ -284,6 +284,33 @@
  * Even without handling focused or not, this is six possible combinations that
  * need to be distinguished from eachother visually.
  */
+/* ─── Shimmer animation for primary CTA buttons ─── */
+@keyframes btn-shimmer {
+  0%   { transform: translateX(-150%) skewX(-20deg); opacity: 1; }
+  18%  { transform: translateX(260%) skewX(-20deg); opacity: 1; }
+  19%  { opacity: 0; }
+  100% { transform: translateX(260%) skewX(-20deg); opacity: 0; }
+}
+
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 70%
+  );
+  transform: translateX(-150%) skewX(-20deg);
+  animation: btn-shimmer 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
 @layer utilities {
 
   /* Hide ugly search cancel button in Chrome until we can style it properly */

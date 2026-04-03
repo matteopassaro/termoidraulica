@@ -72,7 +72,7 @@ export function Navbar() {
               <span>080 123 4567</span>
             </a>
             <Link href="/preventivo">
-              <Button className="bg-accent hover:bg-accent/90 text-white font-semibold rounded-full px-6" data-testid="btn-nav-preventivo">
+              <Button className="btn-shimmer bg-accent hover:bg-accent/90 text-white font-semibold rounded-full px-6 transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-accent/30" data-testid="btn-nav-preventivo">
                 Richiedi Preventivo
               </Button>
             </Link>
@@ -116,7 +116,7 @@ export function Navbar() {
             <span>+39 080 123 4567</span>
           </a>
           <Link href="/preventivo" onClick={() => setMobileMenuOpen(false)}>
-            <Button className="w-full bg-accent hover:bg-accent/90 text-white font-semibold rounded-lg py-6 text-lg">
+            <Button className="btn-shimmer w-full bg-accent hover:bg-accent/90 text-white font-semibold rounded-lg py-6 text-lg transition-all duration-200 hover:scale-[1.02] hover:shadow-lg hover:shadow-accent/30">
               Richiedi Preventivo
             </Button>
           </Link>

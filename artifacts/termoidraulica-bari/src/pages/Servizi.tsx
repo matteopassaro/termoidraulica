@@ -151,7 +151,7 @@ export default function Servizi() {
                 </ul>
                 
                 <Link href={`/preventivo?servizio=${service.id}`}>
-                  <Button className="bg-accent hover:bg-accent/90 text-white font-bold rounded-full h-14 px-8 text-lg shadow-lg shadow-accent/20">
+                  <Button className="btn-shimmer bg-accent hover:bg-accent/90 text-white font-bold rounded-full h-14 px-8 text-lg shadow-lg shadow-accent/20 transition-all duration-200 hover:scale-105 hover:shadow-xl hover:shadow-accent/30">
                     Richiedi preventivo <ArrowRight className="w-5 h-5 ml-2" />
                   </Button>
                 </Link>
@@ -170,7 +170,7 @@ export default function Servizi() {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <a href="tel:+390801234567">
-              <Button size="lg" className="w-full sm:w-auto bg-white text-primary hover:bg-white/90 rounded-full h-14 px-10 text-lg font-bold">
+              <Button size="lg" className="w-full sm:w-auto bg-white text-primary hover:bg-white/90 rounded-full h-14 px-10 text-lg font-bold transition-all duration-200 hover:scale-105 hover:shadow-2xl">
                 Chiama ora: 080 123 4567
               </Button>
             </a>
